@@ -136,7 +136,7 @@ sacrifices the soundness of shx's markup and trigger matching."
     keymap)
   "Keymap for shx.")
 
-(defvar shx-click-file (let ((keymap (make-sparse-keymap)))
+(defvar shx--clickable (let ((keymap (make-sparse-keymap)))
                          (define-key keymap [mouse-1] #'ffap-at-mouse)
                          keymap)
   "Keymap for capturing mouse clicks on files/URLs.")
@@ -399,7 +399,7 @@ If any path is absolute, prepend `comint-file-name-prefix' to it."
     (unless (string= url (car shx-urls)) (push url shx-urls)))
   (add-text-properties
    (match-beginning 0) (match-end 0)
-   `(keymap ,shx-click-file mouse-face link font-lock-face font-lock-doc-face)))
+   `(keymap ,shx--clickable font-lock-face link)))
 
 (defun shx--restart-shell ()
   "Guess the shell command and use `comint-exec' to restart."
